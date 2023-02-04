@@ -24,8 +24,12 @@ class NotificationApi {
             (NotificationResponse notificationResponse) async {});
   }
 
-  Future showNotification(
-      {int id = 0, String? title, String? body, String? payload}) async {
+  Future showNotification({
+    int id = 0,
+    String? title,
+    String? body,
+    String? payload,
+  }) async {
     return flutterLocalNotificationsPlugin.show(
       id,
       title,
