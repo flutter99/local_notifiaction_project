@@ -5,8 +5,7 @@ class NotificationApi {
       FlutterLocalNotificationsPlugin();
 
   Future<void> initNotification() async {
-    AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('mipmap/ic_launcher');
+    AndroidInitializationSettings initializationSettingsAndroid = const AndroidInitializationSettings('mipmap/ic_launcher');
 
     var initializeSettingsIOS = DarwinInitializationSettings(
         requestAlertPermission: true,
@@ -16,15 +15,15 @@ class NotificationApi {
         onDidReceiveLocalNotification:
             (int id, String? title, String? body, String? payload) async {});
 
-    var initializeSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializeSettingsIOS);
+    var initializeSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializeSettingsIOS);
 
     await flutterLocalNotificationsPlugin.initialize(initializeSettings,
-        onDidReceiveNotificationResponse:
-            (NotificationResponse notificationResponse) async {});
+        onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {});
   }
 
-  Future showNotification({
+
+  /// show local notification
+  Future showLocalNotification({
     int id = 0,
     String? title,
     String? body,
@@ -38,11 +37,45 @@ class NotificationApi {
     );
   }
 
+
+  /// local notification
   notificationDetails() {
     return const NotificationDetails(
         android: AndroidNotificationDetails(
           'channelId',
           'channelName',
+          playSound: true,
+          sound: RawResourceAndroidNotificationSound('notisound'),
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails());
+  }
+
+  var scheduledNotificationDateTime = DateTime.now().add(const Duration(seconds: 10));
+
+  /// show schedule notification
+  Future showScheduleNotification({
+    int id = 0,
+    String? title,
+    String? body,
+    String? payload,
+  }) async {
+    return flutterLocalNotificationsPlugin.schedule(
+      id,
+      title,
+      body,
+      scheduledNotificationDateTime,
+      await scheduleNotificationDetails(),
+    );
+  }
+
+  scheduleNotificationDetails() {
+    return const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'channelId',
+          'channelName',
+          ticker: 'ticker',
           playSound: true,
           sound: RawResourceAndroidNotificationSound('notisound'),
           importance: Importance.max,

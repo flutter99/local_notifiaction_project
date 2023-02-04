@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
           const SizedBox(height: 20),
           ElevatedButton.icon(
             onPressed: () {
-              NotificationApi().showNotification(title: 'Local Notification Practice', body: 'This is my first project of Flutter Local Notification');
+              NotificationApi().showLocalNotification(title: 'Local Notification Practice', body: 'This is my first project of Flutter Local Notification');
             },
             icon: const Icon(Icons.notifications),
             label: const Text(
@@ -49,7 +49,9 @@ class _MainScreenState extends State<MainScreen> {
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              NotificationApi().showScheduleNotification(title: 'Schedule Notification Practice', body: 'This is the Flutter Schedule Local Notification');
+            },
             icon: const Icon(Icons.notifications_active),
             label: const Text(
               'Schedule Notification',
