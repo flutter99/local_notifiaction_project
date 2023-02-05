@@ -49,6 +49,7 @@ class NotificationApi {
     );
   }
 
+  final sound = 'notisound.mp3';
 
   /// local notification
   notificationDetails() {
@@ -85,8 +86,8 @@ class NotificationApi {
 
   scheduleNotificationDetails() async {
 
-    final largeIconPath = await Utils.downlaodFile('https://cdn.pixabay.com/photo/2013/07/13/13/53/diamond-161739_960_720.png', 'largeIcon');
-    final bigPicPath = await Utils.downlaodFile('https://cdn.pixabay.com/photo/2022/11/20/09/06/night-view-7603847_960_720.jpg', 'bigPic');
+    final largeIconPath = await Utils.downlaodFile('https://cdn.pixabay.com/photo/2013/07/13/13/53/diamond-161739_960_720.png', 'largeIcon',);
+    final bigPicPath = await Utils.downlaodFile('https://cdn.pixabay.com/photo/2022/11/20/09/06/night-view-7603847_960_720.jpg', 'bigPic',);
 
     final styleInformation = BigPictureStyleInformation(
       FilePathAndroidBitmap(bigPicPath),
@@ -95,7 +96,7 @@ class NotificationApi {
 
     return NotificationDetails(
         android: AndroidNotificationDetails(
-          'channelId',
+          'channelId 1',
           'channelName',
           ticker: 'ticker',
 
@@ -116,7 +117,7 @@ class NotificationApi {
           sound: RawResourceAndroidNotificationSound('notisound'),
 
           styleInformation: styleInformation,
-          importance: Importance.max,
+          ///importance: Importance.max,
           priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails());
